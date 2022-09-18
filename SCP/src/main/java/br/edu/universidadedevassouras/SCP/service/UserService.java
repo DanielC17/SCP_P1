@@ -2,7 +2,6 @@ package br.edu.universidadedevassouras.SCP.service;
 
 
 import br.edu.universidadedevassouras.SCP.Model.Pessoa;
-import br.edu.universidadedevassouras.SCP.Model.PessoaDTO;
 import br.edu.universidadedevassouras.SCP.Repository.PessoaDAO;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,13 +31,9 @@ public class UserService implements UserDetailsService {
         return new User(user.getUsername(), user.getPassword(), new ArrayList<>());
     }
 
-    public Pessoa save(PessoaDTO pessoaDTO) {
-        Pessoa newPessoa = new Pessoa();
-        newPessoa.setUsername(pessoaDTO.getUsername());
-        newPessoa.setPassword(bcryptEncoder.encode(pessoaDTO.getPassword()));
-        newPessoa.setNome(pessoaDTO.getNome());
-        newPessoa.setCPF(pessoaDTO.getCpf());
-        newPessoa.setMatricula(pessoaDTO.getMatricula());
-        return pessoaDAO.save(newPessoa);
+
+    public Pessoa save(Pessoa pessoa) {
+        pessoa.setPassword(bcryptEncoder.encode(pessoa.getPassword()));
+        return pessoaDAO.save(pessoa);
     }
 }

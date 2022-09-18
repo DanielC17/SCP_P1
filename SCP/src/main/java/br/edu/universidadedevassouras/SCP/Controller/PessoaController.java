@@ -14,7 +14,6 @@ public class PessoaController {
 
     @Autowired
     private PessoaDAO pessoaDAO;
-    private Pessoa pessoa;
 
     @Autowired
     private UserService userService;
@@ -24,7 +23,7 @@ public class PessoaController {
        return pessoaDAO.findAll();
     }
 
-    @GetMapping(path = "/pessoa/{id}")
+    @GetMapping(path = "/{id}")
     public @ResponseBody Optional<Pessoa> getPessoa(@PathVariable("id")Long id){
        return pessoaDAO.findById(id);
     }
